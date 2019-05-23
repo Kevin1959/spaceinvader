@@ -17,12 +17,12 @@ public class DessinSpaceInvaders implements DessinJeu {
 	@Override
 	public void dessiner(BufferedImage im) {
 		if (this.jeu.aUnVaisseau()) {
-			Vaisseau vaisseau = this.jeu.recupererVaisseau();
+			Sprite vaisseau = this.jeu.recupererVaisseau();
 			this.dessinerUnVaisseau(vaisseau, im);
 		}
 	}
 
-	private void dessinerUnVaisseau(Vaisseau vaisseau, BufferedImage im) {
+	private void dessinerUnVaisseau(Sprite vaisseau, BufferedImage im) {
 		Graphics2D crayon = (Graphics2D) im.getGraphics();
 
 		crayon.setColor(Color.gray);

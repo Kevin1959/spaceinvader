@@ -12,7 +12,7 @@ public class SpaceInvaders implements Jeu {
 	private static final char MARQUE_VAISSEAU = 'V';
 	int longueur;
 	int hauteur;
-	Vaisseau vaisseau;
+	Sprite vaisseau;
 
 	public SpaceInvaders(int longueur, int hauteur) {
 		this.longueur = longueur;
@@ -96,7 +96,7 @@ public class SpaceInvaders implements Jeu {
 		}
 	}
 
-	public Vaisseau recupererVaisseau() {
+	public Sprite recupererVaisseau() {
 		return this.vaisseau;
 	}
 
