@@ -5,6 +5,12 @@ import fr.unilim.iut.spaceinvaders.moteurjeu.Jeu;
 import fr.unilim.iut.spaceinvaders.utils.DebordementEspaceJeuException;
 import fr.unilim.iut.spaceinvaders.utils.HorsEspaceJeuException;
 
+
+/*
+ * Fonction en cours
+ * https://github.com/iblasquez/tdd_spaceInvaders/blob/master/enonces/SpaceInvaders_S4_TirerMissileDepuisVaisseau.md#4-un-petit-refactoring--
+ */
+
 public class SpaceInvaders implements Jeu {
 
 	private static final char MARQUE_FIN_LIGNE = '\n';
@@ -13,6 +19,7 @@ public class SpaceInvaders implements Jeu {
 	int longueur;
 	int hauteur;
 	Sprite vaisseau;
+	Missile missile;
 
 	public SpaceInvaders(int longueur, int hauteur) {
 		this.longueur = longueur;
@@ -36,19 +43,27 @@ public class SpaceInvaders implements Jeu {
 		return espaceDeJeu.toString();
 	}
 
-	private char recupererMarqueDeLaPosition(int x, int y) {
-		char marque;
-		if (this.aUnVaisseauQuiOccupeLaPosition(x, y))
-			marque = MARQUE_VAISSEAU;
-		else
-			marque = MARQUE_VIDE;
-		return marque;
-	}
+	 private char recupererMarqueDeLaPosition(int x, int y) {
+			char marque;
+			if (this.aUnVaisseauQuiOccupeLaPosition(x, y))
+				marque = Constante.MARQUE_VAISSEAU;
+			else if (this.aUnMissileQuiOccupeLaPosition(x, y))
+					marque = Constante.MARQUE_MISSILE;
+			else marque = Constante.MARQUE_VIDE;
+			return marque;
+		}
 
+	private boolean aUnMissileQuiOccupeLaPosition(int x, int y) {
+		return this.aUnMissile() && missile.occupeLaPosition(x, y);
+	}
 	private boolean aUnVaisseauQuiOccupeLaPosition(int x, int y) {
 		return this.aUnVaisseau() && vaisseau.occupeLaPosition(x, y);
 	}
 
+	private boolean aUnMissile()
+	{
+		return missile != null;
+	}
 	public boolean aUnVaisseau() {
 		return vaisseau != null;
 	}
@@ -117,6 +132,10 @@ public class SpaceInvaders implements Jeu {
 	public boolean etreFini() {
 		return false;
 
+	}
+
+	public void tirerUnMissile(Dimension dimension, int vitesse) {
+		this.missile = this.vaisseau.tirerUnMissile(dimension,vitesse);
 	}
 
 }
